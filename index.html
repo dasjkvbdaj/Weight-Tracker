@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>My Weight Tracker</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <div id="banner" class="banner" role="alert" hidden></div>
+
+  <header class="app-header">
+    <div>
+      <h1>My Weight Tracker</h1>
+      <p id="today" class="today"></p>
+    </div>
+    <button id="theme-toggle" class="theme-btn" type="button" aria-label="Toggle dark mode">Dark</button>
+  </header>
+
+  <nav class="tabs" aria-label="Sections">
+    <button class="tab active" data-view="home" type="button">Home</button>
+    <button class="tab" data-view="history" type="button">Weight History</button>
+  </nav>
+
+  <main>
+    <!-- HOME -->
+    <section id="view-home" class="view">
+      <form id="weight-form" class="entry" novalidate>
+        <label for="weight-input" class="sr-only">Weight in kilograms</label>
+        <input id="weight-input" type="number" inputmode="decimal" step="0.1" min="1" max="500"
+               placeholder="Enter your weight (kg)" autocomplete="off">
+        <button id="save-btn" class="primary" type="submit">Save Weight</button>
+        <p id="form-error" class="error" hidden></p>
+      </form>
+
+      <div class="latest">
+        <p class="label">Latest weight</p>
+        <p id="latest-weight" class="big">—</p>
+        <p id="latest-meta" class="muted"></p>
+        <p id="latest-change" class="change"></p>
+      </div>
+
+      <div class="stats" id="stats"></div>
+
+      <div id="chart-wrap" class="chart-wrap" hidden>
+        <p class="label">Weight over time</p>
+        <svg id="chart" viewBox="0 0 320 140" role="img" aria-label="Weight over time chart"></svg>
+      </div>
+
+      <div class="backup">
+        <p class="label">Backup</p>
+        <div class="row">
+          <button id="export-btn" type="button">Export Backup</button>
+          <button id="import-btn" type="button">Import Backup</button>
+          <input id="import-file" type="file" accept="application/json,.json" hidden>
+        </div>
+        <p class="muted small">Your data lives only in this browser. Export a backup regularly.</p>
+      </div>
+    </section>
+
+    <!-- HISTORY -->
+    <section id="view-history" class="view" hidden>
+      <div class="filters">
+        <label for="filter-mode" class="sr-only">Filter</label>
+        <select id="filter-mode">
+          <option value="all">All records</option>
+          <option value="today">Today</option>
+          <option value="date">Specific date</option>
+          <option value="week">Selected week</option>
+          <option value="month">Selected month</option>
+          <option value="range">Custom range</option>
+        </select>
+        <div id="filter-inputs" class="filter-inputs"></div>
+      </div>
+      <p id="history-count" class="muted small"></p>
+      <div id="history-list" class="history-list"></div>
+    </section>
+  </main>
+
+  <!-- Edit dialog -->
+  <dialog id="edit-dialog">
+    <form method="dialog" id="edit-form">
+      <h2>Edit measurement</h2>
+      <p id="edit-meta" class="muted small"></p>
+      <label for="edit-weight">Weight (kg)</label>
+      <input id="edit-weight" type="number" inputmode="decimal" step="0.1" min="1" max="500">
+      <p id="edit-error" class="error" hidden></p>
+      <div class="row">
+        <button type="button" id="edit-cancel">Cancel</button>
+        <button type="submit" class="primary" id="edit-save">Save</button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- Confirm dialog -->
+  <dialog id="confirm-dialog">
+    <form method="dialog">
+      <h2 id="confirm-title"></h2>
+      <p id="confirm-text"></p>
+      <div class="row wrap" id="confirm-actions"></div>
+    </form>
+  </dialog>
+
+  <script src="script.js"></script>
+</body>
+</html>
