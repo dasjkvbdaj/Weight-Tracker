@@ -359,7 +359,7 @@
       count.textContent = '';
       var msg = !records.length ? 'No measurements yet. Enter your first weight on the Home tab.'
         : (b && b.day) ? 'No weight recorded for this day.'
-        : 'No measurements in this period.';
+          : 'No measurements in this period.';
       list.appendChild(el('p', 'empty', msg));
       return;
     }

@@ -45,3 +45,7 @@ Export a backup regularly, and before clearing browser data.
 - Data is tied to one browser, one device and one site address. It does not sync between devices, and a different URL (for example a new Vercel domain) starts empty. Use Export/Import to move data.
 - Clearing site data, using private browsing or uninstalling the browser can delete records.
 - This is a client-side app with no login. Anyone who can open the site URL can open the interface; your records stay in your own browser's storage and are not uploaded anywhere.
+
+## Offline support
+
+A service worker (`sw.js`) caches the app files on first visit, so the site loads and works with no connection. Updates download in the background and appear on the next load. **When you change any app file, bump `VERSION` in `sw.js`.** The site can also be installed to the home screen (`manifest.webmanifest`). `vercel.json` stops the CDN from caching `sw.js` so updates are detected.

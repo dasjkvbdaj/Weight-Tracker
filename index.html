@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#ffffff">
   <title>My Weight Tracker</title>
+  <link rel="manifest" href="manifest.webmanifest">
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -32,7 +34,7 @@
       <form id="weight-form" class="entry" novalidate>
         <label for="weight-input" class="sr-only">Weight in kilograms</label>
         <input id="weight-input" type="number" inputmode="decimal" step="0.1" min="1" max="500"
-               placeholder="Enter your weight (kg)" autocomplete="off">
+          placeholder="Enter your weight (kg)" autocomplete="off">
         <button id="save-btn" class="primary" type="submit">Save Weight</button>
         <p id="form-error" class="error" hidden></p>
       </form>
@@ -106,5 +108,9 @@
   </dialog>
 
   <script src="script.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js'); });
+  </script>
 </body>
+
 </html>
